@@ -38,6 +38,6 @@ console.log("Executing Line 10");
 
 //Logic to get the sum of two numbers
 function sumOfNumbers(a, b) {
-    let c = a + b;
+    let c = a - b;
     console.log(c);
 }

@@ -19,6 +19,9 @@ console.log(2+2);
 * @created 2026-07-22
 */
 
+short-cut for multi-line comments: ctrl + k + c
+short-cut for un-commenting: ctrl + k + u
+
 function add (a,b){
     return a+b;
 }
