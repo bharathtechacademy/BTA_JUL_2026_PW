@@ -59,18 +59,18 @@ square(5); // Output: 25 // actual value passed is 5
 
 // Function with function as a parameter
 function calculate(num: (x:number) => number): void { // num is a parameter with  type as number
-    console.log(num(5));
+    console.log(num(5)); //Actual value passed is 5
 }
 
 
-//Calling function
+//Calling function (Example 1) with anonymous function as parameter
 calculate(
     (a:number):number =>{
         return a*a ;
     }
 )
 
-
+//Calling function (Example 2) with anonymous function as parameter
 calculate(
     (a:number):number =>{
         return a*a*a ;
