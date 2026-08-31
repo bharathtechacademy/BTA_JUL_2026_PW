@@ -1,0 +1,4 @@
+{
+    "get_all_categories" : "SELECT * FROM CATEGORY;",
+    "get_all_movies" : "SELECT * FROM FILM;"
+}
