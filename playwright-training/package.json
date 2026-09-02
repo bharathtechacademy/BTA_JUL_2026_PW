@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test tests/2-tags/tags.spec.ts",
+    "smoke": "npx playwright test tests/2-tags/tags.spec.ts --grep @smoke",
+    "regression": "npx playwright test tests/2-tags/tags.spec.ts --grep @regression",
+    "sanity": "npx playwright test tests/2-tags/tags.spec.ts --grep @sanity",
+    "hooks": "npx playwright test tests/3-hooks/hooks2.spec.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
