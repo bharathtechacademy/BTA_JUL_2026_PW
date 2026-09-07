@@ -7,6 +7,9 @@ interface empInfo {
     "empId": number,
     "visaStatus": boolean,
     "salary"?: number,
+    hobbies?: string[],
+    role?: string,
+
     "address": {
         "street": string,
         "city": string,
@@ -107,6 +110,8 @@ let companyData: companyInfo = {
 let mergedData = {...empData, ...companyData};
 console.log(mergedData);
 
+mergedData.role = "Software Engineer";
+console.log(mergedData);
 
 // const empData: Map<string, number[]> = new Map();
 // empData.set("Alice Johnson", [75000, 5, 4.2]);
