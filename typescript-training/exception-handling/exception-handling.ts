@@ -40,7 +40,7 @@ let input : any ;
 let age : number = 18;
 
 if(age < 18){
-    throw new Error("You are not eligible to vote.");
+    console.log("You are not eligible to vote.");
 }else{
     console.log("You are eligible to vote.");
 }
