@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 
 
 test("Parabank App Automation", async ({ page }) => {
+    test.slow(); // it will increse time 3X
 
 // 1. Launch application using url (https://parabank.parasoft.com/parabank/index.htm)
 await page.goto("https://parabank.parasoft.com/parabank/index.htm");

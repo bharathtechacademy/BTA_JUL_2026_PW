@@ -1,0 +1,15 @@
+{
+    "cookiesPageHeader":"div[id='CybotCookiebotDialogBodyContentTitle']",
+    "cookiesContent":"div[id='CybotCookiebotDialogBodyContentText']",
+    "creatioLogo":"img[id='CybotCookiebotDialogPoweredbyImage']",
+    "cookiebotLogo":"a[id='CybotCookiebotDialogPoweredbyCybot']",
+    "necessarySwitchButton" :"input[id='CybotCookiebotDialogBodyLevelButtonNecessary']",
+    "preferencesSwitchButton" :"input[id='CybotCookiebotDialogBodyLevelButtonPreferences']",
+    "statisticsSwitchButton" :"input[id='CybotCookiebotDialogBodyLevelButtonStatistics']",
+    "marketingSwitchButton" :"input[id='CybotCookiebotDialogBodyLevelButtonMarketing']",
+    "showDetailsLink":"a[id='CybotCookiebotDialogBodyEdgeMoreDetailsLink']",
+    "allowAllButton":"button[id='CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll']",
+    "allowSelection":"button[id='CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection']",
+    "denyButton":"button[id='CybotCookiebotDialogBodyButtonDecline']",
+    "cookiePopupExpandedView":"a[id='CybotCookiebotDialogNavDetails']"
+}
