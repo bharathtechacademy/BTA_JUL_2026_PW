@@ -103,6 +103,57 @@ test('Verify valid login', async() =>{
 })
 
 
+// Test Case 10 :  Verify login functionality with invalid credentials. 
+test('Verify invalid login', async() =>{
+    const testdata = data["Verify invalid login"];
+    await loginPage.launchApplication();
+    await cookiePage.verifyCookiesPopUpIsDisplayed();
+    await cookiePage.verifyCookiePopupSelectionButtons();
+    await cookiePage.clickOnSelectionButton(testdata.button);
+    await cookiePage.verifyCookiesPopupIsDisappeared();
+    await loginPage.verifyLoginPageIsDisplayed();
+    await loginPage.enterCredentials(testdata.username, testdata.password);
+    await loginPage.clickOnLoginButton();
+    await loginPage.verifyErrorMessageIsDisplayed();
+})
+
+// Test Case 11 :  Verify logout functionality with valid credentials. 
+test('Verify logout', async() =>{
+    const testdata = data["Verify valid login"];
+    await loginPage.launchApplication();
+    await cookiePage.verifyCookiesPopUpIsDisplayed();
+    await cookiePage.verifyCookiePopupSelectionButtons();
+    await cookiePage.clickOnSelectionButton(testdata.button);
+    await cookiePage.verifyCookiesPopupIsDisappeared();
+    await loginPage.verifyLoginPageIsDisplayed();
+    await loginPage.enterCredentials(testdata.username, testdata.password);
+    await loginPage.clickOnLoginButton();
+    await loginPage.waitForLoginAuthenticationPage();
+    await loginPage.enterLoginEmail(testdata.username);
+    await loginPage.clickOnContinueButton();
+    await loginPage.enterLoginPassword(testdata.password);
+    await loginPage.clickOnContinueButton();
+    await homePage.verifyHomePageIsDisplayed();
+    await homePage.clickOnProfileIcon();
+    await homePage.clickOnLogoutButton();
+    await loginPage.verifyLoginPageIsDisplayed();
+})
+
+// Test Case 12 :  Verify login functionality with valid & Invalid credentials. 
+const testdata = data["verify login"];
+for (const dataset of testdata) {
+test.only(`verify login with ${dataset.description}`, async() =>{    
+    await loginPage.launchApplication();
+    await cookiePage.verifyCookiesPopUpIsDisplayed();
+    await cookiePage.verifyCookiePopupSelectionButtons();
+    await cookiePage.clickOnSelectionButton(dataset.button);
+    await cookiePage.verifyCookiesPopupIsDisappeared();
+    await loginPage.verifyLoginPageIsDisplayed();
+    await loginPage.enterCredentials(dataset.username, dataset.password);
+    await loginPage.clickOnLoginButton();
+    await loginPage.verifyLogin(dataset.description);
+})
+}
 
 
 

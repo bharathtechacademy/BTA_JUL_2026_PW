@@ -7,7 +7,7 @@
     "roleDropdownOption":"//span[text()='option']/ancestor::mat-option",
     "inviteButton": "//span[text()=' INVITE ']",
     "invitaionSentToastMessage":"//div[contains(text(),'The invitation has been sent')]",
-    "profile":"//span[contains(@class,'contact-photo') and text()='BT']",
+    "profile":"span[class*='contact-photo']",
     "logoutLink":"//span[text()='Log out']",
     "invitedUsersListSection":"//span[text()='Invited users']"
 }

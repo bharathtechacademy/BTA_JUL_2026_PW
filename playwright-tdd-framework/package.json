@@ -12,5 +12,8 @@
   "devDependencies": {
     "@playwright/test": "^1.63.0"
   },
-  "scripts": {}
+  "scripts": {
+    "ui": "npx playwright test tests/ui --headed --project=chromium",
+    "failed": "npx playwright test --last-failed --project=chromium --headed"
+  }
 }

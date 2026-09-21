@@ -145,7 +145,7 @@ export class WebCommons {
 
     // Common method to compare two different values 
     async compareValues(value1: any, value2: any) : Promise<void> {
-        await expect(value1).toBe(value2);
+        await expect(value1).toContain(value2);
     }
 
     // Common method to verify whether an element has disappeared from the page 

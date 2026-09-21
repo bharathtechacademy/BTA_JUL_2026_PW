@@ -34,6 +34,15 @@ export class LoginPageSteps {
         await this.web.click(loginPage.loginButton);
     }
 
+    // Method to verify login
+    async verifyLogin(scenario: string) {
+        if(scenario === "valid") {
+            await this.web.isElementDisplayed(loginPage.loginAuthHeader);
+        }else{
+            await this.web.isElementDisplayed(loginPage.loginErrorMessage);
+        }
+    }
+
     // Method to verify forgot password link is displayed
     async verifyForgotPasswordLinkIsDisplayed() {
         await this.web.isElementDisplayed(loginPage.forgotPasswordLink);
