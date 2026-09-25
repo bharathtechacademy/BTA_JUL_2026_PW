@@ -1,0 +1,278 @@
+{
+  "info": {
+    "_postman_id": "ad1a0e5c-35cc-4182-9c8b-1fcf2fdc024c",
+    "name": "git_api_collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "31694517",
+    "_collection_link": "https://go.postman.co/collection/31694517-ad1a0e5c-35cc-4182-9c8b-1fcf2fdc024c?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Duplicate repository request",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "//Storing the repository name before each request as global variable and accessing the same later \r\npm.globals.set(\"repoName\", \"PlaywrightRepo\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "//Verify the status code \r\npm.test(\"Verify status code\", function () {\r\n    pm.expect(pm.response.code).to.eql(422);\r\n});\r\n\r\n//Verify the status message  \r\npm.test(\"Verify status message\", function () {\r\n    pm.expect(pm.response.status).to.include(\"Unprocessable Entity\");\r\n});\r\n\r\n//Verify the response time. \r\npm.test(\"Response time is less than 2000ms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(2000);\r\n});\r\n\r\n//Verify response body values. \r\npm.test(\"Verify response body\", function () {\r\n    const resp = pm.response.json();\r\n    pm.expect(resp.message).to.eql(\"Repository creation failed.\");\r\n    pm.expect(resp.errors[0].message).to.eql(\"name already exists on this account\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/vnd.github+json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "X-GitHub-Api-Version",
+            "value": "2026-03-10"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\":\"{{repoName}}\",\r\n    \"description\":\"This is a sample repository.\",\r\n    \"private\":true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/user/repos",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user",
+            "repos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Valid repository request.",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "//Storing the repository name before each request as global variable and accessing the same later \r\npm.globals.set(\"repoName\", \"Test_Repo_\" + Math.floor(Math.random() * 100000));\r\n"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "//Verify the status code \r\npm.test(\"Verify status code\", function () {\r\n    pm.expect(pm.response.code).to.eql(201);\r\n});\r\n\r\n//Verify the status message  \r\npm.test(\"Verify status message\", function () {\r\n    pm.expect(pm.response.status).to.include(\"Created\");\r\n});\r\n\r\n//Verify the response time. \r\npm.test(\"Response time is less than 3000ms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(3000);\r\n});\r\n\r\n//Verify response body values. \r\npm.test(\"Verify response body\", function () {\r\n    const resp = pm.response.json();\r\n    pm.expect(resp.name).to.eql(pm.globals.get(\"repoName\"));\r\n    pm.expect(resp.description).to.eql(\"This is a sample repository.\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/vnd.github+json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "X-GitHub-Api-Version",
+            "value": "2026-03-10"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\":\"{{repoName}}\",\r\n    \"description\":\"This is a sample repository.\",\r\n    \"private\":true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/user/repos",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user",
+            "repos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update repository request",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "//Verify the status code \r\npm.test(\"Verify status code\", function () {\r\n    pm.expect(pm.response.code).to.eql(200);\r\n});\r\n\r\n//Verify the status message  \r\npm.test(\"Verify status message\", function () {\r\n    pm.expect(pm.response.status).to.include(\"OK\");\r\n});\r\n\r\n//Verify the response time. \r\npm.test(\"Response time is less than 2000ms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(3000);\r\n});\r\n\r\n//Verify response body values. \r\npm.test(\"Verify response body\", function () {\r\n    const resp = pm.response.json();\r\n    pm.expect(resp.name).to.eql(pm.globals.get(\"repoName\"));\r\n    pm.expect(resp.description).to.eql(\"This is a sample repository.\");\r\n    pm.expect(resp.private).to.eql(false);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/vnd.github+json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "X-GitHub-Api-Version",
+            "value": "2026-03-10"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"private\":false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/repos/{{owner}}/{{repoName}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "repos",
+            "{{owner}}",
+            "{{repoName}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get repository request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "//Verify the status code \r\npm.test(\"Verify status code\", function () {\r\n    pm.expect(pm.response.code).to.eql(200);\r\n});\r\n\r\n//Verify the status message  \r\npm.test(\"Verify status message\", function () {\r\n    pm.expect(pm.response.status).to.include(\"OK\");\r\n});\r\n\r\n//Verify the response time. \r\npm.test(\"Response time is less than 2000ms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(3000);\r\n});\r\n\r\n//Verify response body values. \r\npm.test(\"Verify response body\", function () {\r\n    const resp = pm.response.json();\r\n    pm.expect(resp.name).to.eql(pm.globals.get(\"repoName\"));\r\n    pm.expect(resp.description).to.eql(\"This is a sample repository.\");\r\n    pm.expect(resp.private).to.eql(false);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/vnd.github+json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "X-GitHub-Api-Version",
+            "value": "2026-03-10"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/repos/{{owner}}/{{repoName}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "repos",
+            "{{owner}}",
+            "{{repoName}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete repository request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "//Verify the status code \r\npm.test(\"Verify status code\", function () {\r\n    pm.expect(pm.response.code).to.eql(204);\r\n});\r\n\r\n//Verify the status message  \r\npm.test(\"Verify status message\", function () {\r\n    pm.expect(pm.response.status).to.include(\"No Content\");\r\n});\r\n\r\n//Verify the response time. \r\npm.test(\"Response time is less than 2000ms\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(3000);\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/vnd.github+json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "X-GitHub-Api-Version",
+            "value": "2026-03-10"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/repos/{{owner}}/{{repoName}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "repos",
+            "{{owner}}",
+            "{{repoName}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
