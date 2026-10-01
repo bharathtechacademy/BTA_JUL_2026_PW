@@ -4,7 +4,9 @@
         "title": "Log in | Creatio"
     },
     "api": {
-        "url": "http://localhost:4000"
+        "base_url": "https://api.github.com",
+        "owner":"bharattechacademy11",
+        "token": "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"
     },
     "db": {
         "host": "localhost",

@@ -88,3 +88,32 @@ Stop thread => Stop the entire thread execution for the current user.
 Stop test => Stop the entire test execution. 
 
 4. Thread properties (Most important part of the thread group )
+
+- Number of Threads (users) : How many virtual users do you want to deploy? 
+
+Ex: 100 (That means we are planning to create 100 virtual users to test our API request. )
+
+- Ramp-up Period (in seconds) : Total time to deploy all the users that we have created 
+
+Ex: 10 Seconds (It means 100 users will be deployed in 10 seconds. That means 10 users per second we are going to deploy. )
+
+- Loop Count : Total number of iterations to be executed to repeat the same process 
+
+Ex: 2 Loops (That means I want to repeat the same 100 users within 10 seconds two times. )
+
+5. Same user on each iteration : The same virtual user will be repeated instead of trashed in each iteration.
+
+6. Delay thread creation until needed : Whenever we are going to create 100 users and we want to deploy in 10 seconds, that means every second we need only 10 users. Instead of creating all 100 users at the beginning, every time it is needed, we are going to create the users and deploy the same. 
+
+7. Specify thread lifetime :
+
+=> Duration : Duration is all about the total time that you want to spend to deploy multiple users to test the application, or you want to run this JMeter test execution. 
+=> Start-up Delay :Delay before each and every test begins. For example, if I want to add 2 seconds, after 2 seconds only it is going to deploy the user and test the API request.
+
+## Configuration elements 
+
+Configuration elements are all about a set of templates which we are going to use to maintain test data or configuration data while sending the API request. 
+
+Right-click on the thread group => Add => Config element => User defining variables 
+
+## Samplers in JMeter 
