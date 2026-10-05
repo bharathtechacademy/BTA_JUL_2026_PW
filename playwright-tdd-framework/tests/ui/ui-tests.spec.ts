@@ -136,7 +136,7 @@ test('Verify logout', async() =>{
     await homePage.verifyHomePageIsDisplayed();
     await homePage.clickOnProfileIcon();
     await homePage.clickOnLogoutButton();
-    await loginPage.verifyLoginPageIsDisplayed();
+    await loginPage.verifyLoginPageIsDisplayed();    
 })
 
 // Test Case 12 :  Verify login functionality with valid & Invalid credentials. 

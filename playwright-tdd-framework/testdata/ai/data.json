@@ -1,0 +1,7 @@
+{
+    "generate": {
+        "model": "{{model_name}}",
+        "prompt": "{{prompt}}",
+        "stream": false
+    }
+}

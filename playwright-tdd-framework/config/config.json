@@ -16,6 +16,7 @@
         "password": "my_password"
     },
     "ai": {
-        "url": "http://localhost:5000"
+        "url": "http://localhost:11434",
+        "endpoint": "/api/generate"
     }
 }

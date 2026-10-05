@@ -20,15 +20,14 @@ export class JMeterCommons {
     }
 
     // Common method to run the JMeter test plan 
-    async runJmeterTestPlan(testplanName:string): Promise<void>{
-
-        console.log(`Execution started for JMeter test plan. : ${testplanName}`);
+    async runJmeterTestPlan(testplanName:string): Promise<void>{        
 
         //Collect and store the JMETER folder structure and each and every file path. 
         const projectRoot = process.cwd();//playwright-tdd-framework
         const jmeterBasePath = `${projectRoot}/tests/load/jmeter`;//Path to Jmeter folder 
         const jmeterToolPath = `${jmeterBasePath}/bin/jmeter.bat`;//Path to the JMETER.bat file to launch JMeter using CMD 
         const jmeterTestPlanPath = `${jmeterBasePath}/testplans/${testplanName}`;//Full path to the JMeter test plan file
+        console.log(`Execution started for JMeter test plan. : ${jmeterTestPlanPath}`);
 
         //Add the folder structure to store the test results. 
         const jmeterResultsPath = `${jmeterBasePath}/results/TestResults_${Date.now()}.csv`;//path to store the JMeter test results
