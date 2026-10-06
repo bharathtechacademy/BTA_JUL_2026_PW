@@ -1,0 +1,22 @@
+{
+    "web" :{
+        "url": "https://accounts.creatio.com/login/alm",
+        "title": "Log in | Creatio"
+    },
+    "api": {
+        "base_url": "https://api.github.com",
+        "owner":"bharattechacademy11",
+        "token": "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"
+    },
+    "db": {
+        "host": "localhost",
+        "port": 5432,
+        "database": "my_database",
+        "user": "my_user",
+        "password": "my_password"
+    },
+    "ai": {
+        "url": "http://localhost:11434",
+        "endpoint": "/api/generate"
+    }
+}

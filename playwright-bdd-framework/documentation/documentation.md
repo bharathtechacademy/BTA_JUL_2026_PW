@@ -23,7 +23,7 @@
 
 1. commons => To maintain all the common methods related to UI (commons\ui\web-commons.ts), API (commons\api\api-commons.ts), database (commons\db\db-commons.ts), and performance testing (commons\jmeter\jmeter-commons.ts), and of course AI-related (commons\ai\ai-commons.ts) common methods at one place 
 
-2. config => config.json File 2: Maintain all the configurations like urls's , connection details related to UI, API, database, etc. 
+2. config => config.json File to Maintain all the configurations like urls's , connection details related to UI, API, database, etc. 
 
 3. testdata => To maintain test data related to each and every component like UI (testdata\ui\data.json), API (testdata\api\data.json), database(testdata\db\data.json), AI(testdata\ai\data.json), and performance testing 
 

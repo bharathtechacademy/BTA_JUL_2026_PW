@@ -208,7 +208,7 @@ test("Playwright Web Actions", async ({ page }) => {
      const uploadButton = page.locator("//input[@for='sampleInput']");
 
      //Upload the file by selecting the files. 
-     await uploadButton.setInputFiles('path/to/file.jpg');
+     await uploadButton.setInputFiles(['path/to/file.jpg']);
 
      /* ================================================
          Alert Web Element Validations

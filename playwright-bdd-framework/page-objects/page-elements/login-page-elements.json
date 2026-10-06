@@ -1,0 +1,17 @@
+{
+    "loginPageHeader": "span.form-title",
+    "businessEmailTextBox":"input[aria-label='Business email']",
+    "forgotPasswordLink":"a.forgot-password-link",
+    "forgotPasswordConfirmationMsg":"//span[text()='Almost done!']",
+    "passwordTextBox":"input[aria-label='Password']",
+    "loginButton":"//span[text()=' LOG IN ']",
+    "loginErrorMessage":"//div[contains(text(),'Invalid email or password')]",
+    "linkedInIcon":"img.icon-LinkedIn",
+    "googleIcon":"img.icon-google",
+    "signUpLink":"//span[text()=' SIGN UP ']"   ,
+    "loginAuthHeader":"h1[class='web-auth-title']",
+    "loginEmail":"input[name='email']",
+    "continueButton":"button[type='submit']",
+    "loginPassword":"input#login-password"
+
+}
