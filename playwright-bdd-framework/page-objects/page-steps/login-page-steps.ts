@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import loginPage from '../page-elements//login-page-elements.json'  with {type: 'json'};
-import { WebCommons } from '../../commons/ui/web-commons.js';
+import { WebCommons } from '../../commons/ui/web-commons.ts';
 
 export class LoginPageSteps {
     page: Page;

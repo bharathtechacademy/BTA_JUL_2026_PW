@@ -19,7 +19,7 @@ Feature: API feature in Github application
         And User should receive body having "name" datatype as "string"
 
     Scenario: Request to update a valid repository within GitHub.
-        When User send a "PATCH" request with endpoint "/repos/bharattechacademy11/ValidRepo" to update the repository description as "Updated Description"
+        When User send a "PATCH" request with endpoint "/repos/bharathtechacademy05/ValidRepo" to update the repository description as "Updated Description"
         Then User should receive a response with status code 200
         And User should receive status message "OK"
         And User should receive body having "name" as "ValidRepo"
@@ -28,7 +28,7 @@ Feature: API feature in Github application
         And User should receive body having "description" datatype as "string"
 
     Scenario: Request to get a valid repository within GitHub.
-        When User send a "GET" request with endpoint "/repos/bharattechacademy11/ValidRepo"
+        When User send a "GET" request with endpoint "/repos/bharathtechacademy05/ValidRepo"
         Then User should receive a response with status code 200
         And User should receive status message "OK"
         And User should receive body having "name" as "ValidRepo"
@@ -37,6 +37,6 @@ Feature: API feature in Github application
         And User should receive body having "description" datatype as "string"
 
     Scenario: Request to delete a valid repository within GitHub.
-        When User send a "DELETE" request with endpoint "/repos/bharattechacademy11/ValidRepo"
+        When User send a "DELETE" request with endpoint "/repos/bharathtechacademy05/ValidRepo"
         Then User should receive a response with status code 204
         And User should receive status message "No Content"

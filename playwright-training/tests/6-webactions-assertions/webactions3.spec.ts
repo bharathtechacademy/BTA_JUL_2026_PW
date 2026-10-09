@@ -7,6 +7,10 @@ test('Handling the Alerts', async ({ page }) => {
 
     // Locate the buttons to trigger the alerts. 
     const infoAlertButton = await page.locator('//button[@id="alertButton"]');
+
+    //takescreenshot of button
+    
+
     const confirmAlertButton = await page.locator('//button[@id="confirmButton"]');
     const promptAlertButton = await page.locator('//button[@id="promtButton"]');
 

@@ -19,7 +19,12 @@ Feature: Login feature in CREATIO CRM application
         Then cookies popup should be closed
         And Login page should be displayed
         When User enters "<username>" and "<password>" in the login page
-        And User clicks on the "login" button
+        And User clicks on the login button
+        Then Login Authentication Page should be displayed
+        When User enter login email "<username>"
+        And Click on continue button
+        And User enters login password "<password>"
+        And Click on continue button
         Then Login should be "<result>"
 
         Examples:
@@ -37,9 +42,15 @@ Feature: Login feature in CREATIO CRM application
         Then cookies popup should be closed
         And Login page should be displayed
         When User enters "<username>" and "<password>" in the login page
-        And User clicks on the "login" button
+        And User clicks on the login button
+        Then Login Authentication Page should be displayed
+        When User enter login email "<username>"
+        And Click on continue button
+        And User enters login password "<password>"
+        And Click on continue button
         Then Login should be "<result>"
-        When User clicks on the logout button
+        When User clicks on the profile icon
+        And User clicks on the logout button
         Then Logout should be successful and navigate to the login page
 
         Examples:

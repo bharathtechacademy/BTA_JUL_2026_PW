@@ -1,55 +1,14 @@
 {
-     "duplicateRepo":{
-        "requestType":"post",
-        "endpoint":"/user/repos",
+     "createRepo":{
         "payload":{            
-            "name":"PlaywrightRepo",
+            "name":"{{REPO_NAME}}",
             "description":"This is a sample repository.",
             "private":true
-        },
-        "expCode":422,
-        "expMessage":"Unprocessable Entity",
-        "expError":"Repository creation failed.",
-        "expErrorDatatype":"string"
-     },
-    "validRepo":{
-        "requestType":"post",
-        "endpoint":"/user/repos",
-        "payload":{            
-            "name":"ValidRepo",
-            "description":"This is a sample repository.",
-            "private":true
-        },
-        "expCode":201,
-        "expMessage":"Created",
-        "expRepo":"ValidRepo",
-        "expRepoDatatype":"string"
+        }
      },
     "updateRepo":{
-        "requestType":"patch",
-        "endpoint":"/repos/bharattechacademy11/ValidRepo",
         "payload":{            
-            "private":false
-        },
-        "expCode":200,
-        "expMessage":"OK",
-        "expRepo":"ValidRepo",
-        "expRepoDatatype":"string"
-     },
-    "getRepo":{
-        "requestType":"get",
-        "endpoint":"/repos/bharattechacademy11/ValidRepo",
-        "payload":{},
-        "expCode":200,
-        "expMessage":"OK",
-        "expRepo":"ValidRepo",
-        "expRepoDatatype":"string"
-     },
-    "deleteRepo":{
-        "requestType":"delete",
-        "endpoint":"/repos/bharattechacademy11/ValidRepo",
-        "payload":{},
-        "expCode":204,
-        "expMessage":"No Content"
+            "description":"{{DESCRIPTION}}"
+        }
      }
 }

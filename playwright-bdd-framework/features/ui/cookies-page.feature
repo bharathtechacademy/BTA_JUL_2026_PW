@@ -8,7 +8,7 @@ Feature: Cookies feature in CREATIO CRM application
     Scenario: Verify cookies pop-up content
         Given Launch the Creatio CRM application
         Then Cookies page should be displayed
-        And Verify cookies pop-up content disaplayed as below
+        And Verify cookies pop-up content
             """
             We may use cookies and similar technologies to collect information about the ways you interact with and use the website, to support and enhance features and functionality, to monitor performance, to personalize content and experiences, for marketing and analytics, and for other lawful purposes.
             """

@@ -1,4 +1,4 @@
-{
+{"type": "module",
   "dependencies": {
     "@cucumber/cucumber": "^12.9.0",
     "@types/node": "^26.6.4",
@@ -11,7 +11,13 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@playwright/test": "^1.63.0"
+    "@playwright/test": "^1.63.0",
+    "tsx": "^4.23.15"
   },
-  "scripts": {}
+  "scripts": {
+    "test": "npx cucumber-js",
+    "ui": "npx cucumber-js features/ui",
+    "api": "npx cucumber-js features/api",
+    "load": "npx cucumber-js features/load"
+  }
 }

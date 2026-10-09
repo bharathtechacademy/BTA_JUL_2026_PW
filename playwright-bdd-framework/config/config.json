@@ -6,7 +6,7 @@
     "api": {
         "base_url": "https://api.github.com",
         "owner":"bharattechacademy11",
-        "token": "your token"
+        "token": "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"
     },
     "db": {
         "host": "localhost",
