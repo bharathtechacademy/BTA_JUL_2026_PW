@@ -4,7 +4,7 @@ import { WebCommons } from '../../commons/ui/web-commons.js';
 
 export class CookiePageSteps {
     page: Page;
-    web: WebCommons
+    web: WebCommons;
 
     constructor(page: Page) {
         this.page = page;

@@ -10,10 +10,10 @@ test('handling frames', async ({ page }) => {
     const mainPageElement = await page.locator('h1[class="text-center"]')
 
     //Locate the frame. 
-    const frame = await page.frameLocator('iframe#frame1');
+    const frame = page.frameLocator('iframe#frame1');
 
     //Locate the frame element
-    const frameElement = await frame.locator('h1[id="sampleHeading"]')
+    const frameElement = frame.locator('h1[id="sampleHeading"]')
 
     //Copy and print the frame element text. 
     console.log(await frameElement.textContent());

@@ -1,0 +1,20 @@
+Key,Name,Status,Precondition,Objective,Folder,Priority,Component,Labels,Owner,Estimated Time,Coverage (Issues),Coverage (Pages),Test Script (Step-by-Step) - Step,Test Script (Step-by-Step) - Test Data,Test Script (Step-by-Step) - Expected Result,Test Script (Plain Text),Test Script (BDD)
+,Verify the cookies pop-up is displayed successfully. ,Draft,,,,Normal,,,712020:5823ea36-5934-4d1d-9f77-8ef6257f1ac9,,,,Launch the Chrome browser. ,,Chrome browser should be launched successfully. ,,
+,,,,,,,,,,,,,"Enter the URL - https://accounts.creatio.com/login/alm And launch the 
+application. ",,The Creatio CRM application should be launched successfully. ,,
+,,,,,,,,,,,,,Verify the cookies pop-up is displayed successfully. ,,Cookies pop-up should be displayed successfully. ,,
+,Verify the cookies pop-up Logos ,Draft,,,,Normal,,,712020:5823ea36-5934-4d1d-9f77-8ef6257f1ac9,,,,Launch the Chrome browser. ,,Chrome browser should be launched successfully. ,,
+,,,,,,,,,,,,,"Enter the URL - https://accounts.creatio.com/login/alm And launch the 
+application. ",,The Creatio CRM application should be launched successfully. ,,
+,,,,,,,,,,,,,Verify the cookies pop-up is displayed successfully. ,,Cookies pop-up should be displayed successfully. ,,
+,,,,,,,,,,,,,Verify the cookies pop-up Logos ,,"Cookies pop-up should have two logos. 
+1. Creatio logo
+2. Cookiebot Logo",,
+,Verify Login With Valid Credentials,Draft,,,,Normal,,,712020:5823ea36-5934-4d1d-9f77-8ef6257f1ac9,,,,Launch the Chrome browser. ,,Chrome browser should be launched successfully. ,,
+,,,,,,,,,,,,,"Enter the URL - https://accounts.creatio.com/login/alm And launch the 
+application. ",,The Creatio CRM application should be launched successfully. ,,
+,,,,,,,,,,,,,Verify the cookies pop-up is displayed successfully. ,,Cookies pop-up should be displayed successfully. ,,
+,,,,,,,,,,,,,Select the `Allow All` button and verify the cookies pop-up is closed. ,,Cookies pop-up should be closed successfully and Login page should be displayed. ,,
+,,,,,,,,,,,,,Enter valid credentials in the Login Page,,User should be able to enter valid credentials. ,,
+,,,,,,,,,,,,,Click on the login button. ,,User should be able to click on the login button. ,,
+,,,,,,,,,,,,,Verify a login is successful. ,,User login should be successful. ,,

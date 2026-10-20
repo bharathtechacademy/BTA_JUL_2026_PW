@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA Requirement Analysis & Test Plan - CRM-5: Design and Implement Login Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-light: #6366f1;
+      --primary-dark: #3730a3;
+      --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+      --surface-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+      --bg: #0b0f19;
+      --bg-card: #111827;
+      --bg-card-subtle: #1e293b;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --border-accent: rgba(99, 102, 241, 0.3);
+      --success: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.15);
+      --warning: #f59e0b;
+      --warning-bg: rgba(245, 158, 11, 0.15);
+      --danger: #f43f5e;
+      --danger-bg: rgba(244, 63, 94, 0.15);
+      --info: #06b6d4;
+      --info-bg: rgba(6, 182, 212, 0.15);
+      --purple: #8b5cf6;
+      --purple-bg: rgba(139, 92, 246, 0.15);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.25);
+      --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    /* Header & Hero */
+    .hero-card {
+      background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-card), var(--shadow-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--primary-gradient);
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 9999px;
+    }
+
+    .badge-jira {
+      background: #0052cc;
+      color: #ffffff;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .badge-jira:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 82, 204, 0.4);
+    }
+
+    .badge-status {
+      background: var(--purple-bg);
+      color: #c084fc;
+      border: 1px solid rgba(192, 132, 252, 0.3);
+    }
+
+    .badge-priority-high {
+      background: var(--danger-bg);
+      color: #fb7185;
+      border: 1px solid rgba(251, 113, 133, 0.3);
+    }
+
+    .badge-priority-med {
+      background: var(--warning-bg);
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+
+    .hero-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .hero-meta-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 900px;
+      margin-bottom: 24px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .meta-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-top: 4px;
+    }
+
+    .action-btn-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--primary-gradient);
+      color: white;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card-subtle);
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: #334155;
+      color: #fff;
+    }
+
+    /* Stats KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .kpi-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .kpi-blue::after { background: #3b82f6; }
+    .kpi-purple::after { background: #8b5cf6; }
+    .kpi-emerald::after { background: #10b981; }
+    .kpi-amber::after { background: #f59e0b; }
+    .kpi-rose::after { background: #f43f5e; }
+
+    .kpi-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .kpi-val {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 8px 0 4px;
+    }
+
+    .kpi-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Section Cards */
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .icon-req { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+    .icon-risk { background: rgba(244, 63, 94, 0.2); color: #fb7185; }
+    .icon-assume { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .icon-scenario { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .icon-data { background: rgba(6, 182, 212, 0.2); color: #22d3ee; }
+    .icon-strategy { background: rgba(139, 92, 246, 0.2); color: #c084fc; }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    thead {
+      background: #1e293b;
+    }
+
+    th {
+      padding: 14px 16px;
+      font-weight: 700;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+      color: #e2e8f0;
+      vertical-align: top;
+    }
+
+    tbody tr:hover {
+      background: rgba(30, 41, 59, 0.5);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Badges & Tags */
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .tag-p1 { background: rgba(244, 63, 94, 0.2); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
+    .tag-p2 { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .tag-p3 { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+    
+    .tag-ui { background: rgba(139, 92, 246, 0.2); color: #c084fc; }
+    .tag-func { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .tag-neg { background: rgba(244, 63, 94, 0.2); color: #fb7185; }
+    .tag-sec { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
+    .tag-a11y { background: rgba(6, 182, 212, 0.2); color: #22d3ee; }
+    .tag-edge { background: rgba(234, 179, 8, 0.2); color: #facc15; }
+
+    .tag-auto-yes { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .tag-auto-no { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; }
+
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      background: #0f172a;
+      padding: 3px 6px;
+      border-radius: 4px;
+      border: 1px solid #334155;
+      color: #38bdf8;
+    }
+
+    /* Risk Cards Grid */
+    .risk-grid, .assume-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    .risk-card {
+      background: #1e293b;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--danger);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+
+    .risk-card.med {
+      border-left-color: var(--warning);
+    }
+    .risk-card.low {
+      border-left-color: var(--success);
+    }
+
+    .risk-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .risk-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+    }
+
+    .risk-impact {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+
+    .risk-mitigation {
+      font-size: 0.83rem;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      border: 1px dashed #334155;
+      color: #94a3b8;
+    }
+    .risk-mitigation strong {
+      color: #38bdf8;
+    }
+
+    .assume-card {
+      background: #1e293b;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--warning);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+    .assume-card strong {
+      color: #fbbf24;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    /* Scenario Filter Toolbar */
+    .filter-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      background: #1e293b;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary-light);
+    }
+
+    .search-input {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      min-width: 240px;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+    }
+
+    /* AC checklist */
+    .ac-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .ac-item {
+      background: #1e293b;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .ac-num {
+      background: rgba(99, 102, 241, 0.2);
+      color: #818cf8;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .ac-text {
+      font-size: 0.92rem;
+      color: #e2e8f0;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    /* Print View */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0;
+      }
+      .hero-card, .section-card, .kpi-card, .risk-card, .assume-card {
+        background: #ffffff !important;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        color: #000000 !important;
+      }
+      .filter-toolbar, .action-btn-group {
+        display: none !important;
+      }
+      th {
+        background: #f1f5f9 !important;
+        color: #000000 !important;
+      }
+      td, .hero-title, .section-title {
+        color: #000000 !important;
+        -webkit-text-fill-color: initial !important;
+      }
+      .tag, .badge-pill {
+        border: 1px solid #999 !important;
+        color: #000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Hero Header Card -->
+    <header class="hero-card">
+      <div class="hero-header">
+        <div class="hero-meta-badges">
+          <a href="https://bharathtechacademy40.atlassian.net/browse/10017" target="_blank" class="badge-pill badge-jira">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 11.514H0a11.514 11.514 0 0 0 11.571 11.514v-11.514zm.858-11.514v11.514h11.571A11.514 11.514 0 0 0 12.429 0zm0 12.429v11.514H24a11.514 11.514 0 0 0-11.571-11.514z"/></svg>
+            CRM-5
+          </a>
+          <span class="badge-pill badge-status">To Do</span>
+          <span class="badge-pill badge-priority-med">Medium Priority</span>
+          <span class="badge-pill" style="background: rgba(6, 182, 212, 0.15); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.3);">Story</span>
+        </div>
+        <div class="action-btn-group">
+          <button class="btn btn-secondary" onclick="window.print()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+            Print / Save PDF
+          </button>
+        </div>
+      </div>
+
+      <h1 class="hero-title">CRM-5 : Design and Implement Login Form</h1>
+      <p class="hero-subtitle">* Each social login option has a logo icon and a hyperlink label.</p>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span class="meta-label">Assignee</span>
+          <span class="meta-value">Unassigned</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Reporter</span>
+          <span class="meta-value">Bharath Tech Academy</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Created Date</span>
+          <span class="meta-value">15/10/2026</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Analysis Generated</span>
+          <span class="meta-value">16/10/2026, 8:33:17 am</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- KPI Highlights Bar -->
+    <section class="kpi-grid">
+      <div class="kpi-card kpi-blue">
+        <span class="kpi-title">Total Test Scenarios</span>
+        <div class="kpi-val">17</div>
+        <span class="kpi-desc">Across all QA functional dimensions</span>
+      </div>
+      <div class="kpi-card kpi-rose">
+        <span class="kpi-title">Critical / P1 Tests</span>
+        <div class="kpi-val">8</div>
+        <span class="kpi-desc">Must pass for release sign-off</span>
+      </div>
+      <div class="kpi-card kpi-emerald">
+        <span class="kpi-title">Automation Potential</span>
+        <div class="kpi-val">100%</div>
+        <span class="kpi-desc">17 scenarios ready for Playwright</span>
+      </div>
+      <div class="kpi-card kpi-amber">
+        <span class="kpi-title">Identified Risks</span>
+        <div class="kpi-val">5</div>
+        <span class="kpi-desc">With mitigation strategies</span>
+      </div>
+      <div class="kpi-card kpi-purple">
+        <span class="kpi-title">Acceptance Criteria</span>
+        <div class="kpi-val">19</div>
+        <span class="kpi-desc">100% test coverage mapped</span>
+      </div>
+    </section>
+
+    <!-- Section 1: Detailed Requirements & Acceptance Criteria -->
+    <section class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="section-icon icon-req">📋</span>
+          Detailed Requirements & Acceptance Criteria
+        </div>
+        <span class="tag tag-func">19 Criteria</span>
+      </div>
+      
+      <div style="margin-bottom: 20px;">
+        <h4 style="color: #cbd5e1; margin-bottom: 8px;">Business Context & Scope</h4>
+        <p style="color: #94a3b8; font-size: 0.95rem;">The login form is for existing Creatio CRM users. It should support secure sign-in and include options for password recovery, social login, account creation, cookie settings, and chatbot help.</p>
+      </div>
+
+      <h4 style="color: #cbd5e1; margin-bottom: 12px;">Acceptance Criteria Verification Matrix</h4>
+      <div class="ac-list">
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-01</span>
+            <span class="ac-text">The form has a header with the title "LOG IN TO YOUR ACCOUNT".</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-02</span>
+            <span class="ac-text">The form includes:</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-03</span>
+            <span class="ac-text">Business email textbox with a label on top</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-04</span>
+            <span class="ac-text">Password textbox with a label on top</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-05</span>
+            <span class="ac-text">LOG IN button</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-06</span>
+            <span class="ac-text">The password textbox has an eye icon to show or hide the entered password.</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-07</span>
+            <span class="ac-text">A "Forgot password" link is placed on top of the password textbox.</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-08</span>
+            <span class="ac-text">Below the LOG IN button, there is a label "or log in using".</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-09</span>
+            <span class="ac-text">The form includes social login options below the LOG IN button:</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-10</span>
+            <span class="ac-text">LinkedIn</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-11</span>
+            <span class="ac-text">Google</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-12</span>
+            <span class="ac-text">Facebook</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-13</span>
+            <span class="ac-text">Each social login option has a logo icon and a hyperlink label.</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-14</span>
+            <span class="ac-text">Below the social media icons, there is a label "Don’t have an account?".</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-15</span>
+            <span class="ac-text">A "SIGN UP" link appears below "Don’t have an account?" to create a new account.</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-16</span>
+            <span class="ac-text">A cookie settings icon appears without a label in the bottom left corner.</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-17</span>
+            <span class="ac-text">The cookie settings icon allows users to view, withdraw, and change cookie consent settings.</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-18</span>
+            <span class="ac-text">A creatio chatbot icon appears without a label in the bottom right corner.</span>
+          </div>
+        
+          <div class="ac-item">
+            <span class="ac-num">AC-19</span>
+            <span class="ac-text">The chatbot icon helps customers with FAQs.</span>
+          </div>
+        
+      </div>
+    </section>
+
+    <!-- Section 2: Risks & Mitigation -->
+    <section class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="section-icon icon-risk">⚠️</span>
+          QA Risk Assessment & Mitigation Strategies
+        </div>
+        <span class="tag tag-p1">5 Assessed Risks</span>
+      </div>
+      <div class="risk-grid">
+        
+          <div class="risk-card high">
+            <div class="risk-header">
+              <span class="risk-title">Plaintext Password Exposure in DOM / Toggle Bug</span>
+              <span class="tag tag-p1">High Risk</span>
+            </div>
+            <p class="risk-impact">If eye toggle fails to reset type back to "password" or leaks into logs, user credentials may be compromised.</p>
+            <div class="risk-mitigation">
+              <strong>QA Mitigation:</strong> Verify input type strictly toggles between "password" and "text"; ensure automated scripts verify type="password" on form submit.
+            </div>
+          </div>
+        
+          <div class="risk-card high">
+            <div class="risk-header">
+              <span class="risk-title">Brute Force & Credential Stuffing</span>
+              <span class="tag tag-p1">High Risk</span>
+            </div>
+            <p class="risk-impact">Attacker automated attacks could compromise accounts without rate-limiting or CAPTCHA.</p>
+            <div class="risk-mitigation">
+              <strong>QA Mitigation:</strong> Implement and test account lockout or rate-limiting (HTTP 429) after 5 consecutive failed attempts.
+            </div>
+          </div>
+        
+          <div class="risk-card medium">
+            <div class="risk-header">
+              <span class="risk-title">Social Login Redirect Hijacking / OAuth Misconfiguration</span>
+              <span class="tag tag-p2">Medium Risk</span>
+            </div>
+            <p class="risk-impact">Misconfigured redirect_uri can allow token leakage or open redirection vulnerabilities.</p>
+            <div class="risk-mitigation">
+              <strong>QA Mitigation:</strong> Validate exact redirect_uri whitelist on OAuth provider responses and test cancellation flows.
+            </div>
+          </div>
+        
+          <div class="risk-card medium">
+            <div class="risk-header">
+              <span class="risk-title">Cookie Consent Withdrawal Impact</span>
+              <span class="tag tag-p2">Medium Risk</span>
+            </div>
+            <p class="risk-impact">If user withdraws cookie consent, necessary auth cookies might inadvertently be blocked or non-essential cookies persisted.</p>
+            <div class="risk-mitigation">
+              <strong>QA Mitigation:</strong> Validate strict categorization: strictly necessary cookies remain operational; marketing/analytics cookies cleared immediately on withdrawal.
+            </div>
+          </div>
+        
+          <div class="risk-card low">
+            <div class="risk-header">
+              <span class="risk-title">Slow Loading of Third-Party Scripts (Chatbot/Social)</span>
+              <span class="tag tag-p3">Low Risk</span>
+            </div>
+            <p class="risk-impact">If external CDN fails, login form might experience layout shift or delayed interactivity.</p>
+            <div class="risk-mitigation">
+              <strong>QA Mitigation:</strong> Ensure async/defer script loading with fallback UI in Playwright network failure tests.
+            </div>
+          </div>
+        
+      </div>
+    </section>
+
+    <!-- Section 3: Assumptions & Dependencies -->
+    <section class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="section-icon icon-assume">💡</span>
+          Key Assumptions & Test Constraints
+        </div>
+        <span class="tag tag-p2">5 Assumptions</span>
+      </div>
+      <div class="assume-grid">
+        
+          <div class="assume-card">
+            <strong>Technical & Architecture</strong>
+            <p style="color: #cbd5e1; font-size: 0.88rem;">Login form is built as a Single Page Application (SPA) communicating over HTTPS with authentication REST APIs returning standard JWT bearer tokens.</p>
+          </div>
+        
+          <div class="assume-card">
+            <strong>Session & State Management</strong>
+            <p style="color: #cbd5e1; font-size: 0.88rem;">Successful authentication sets secure, HttpOnly, SameSite session cookies. Unauthenticated requests redirect back to login.</p>
+          </div>
+        
+          <div class="assume-card">
+            <strong>Third-Party Social Auth</strong>
+            <p style="color: #cbd5e1; font-size: 0.88rem;">OAuth 2.0 / OIDC integrations for Google, LinkedIn, and Facebook utilize sandbox/test client IDs in staging environments.</p>
+          </div>
+        
+          <div class="assume-card">
+            <strong>Cookie & Chatbot Widgets</strong>
+            <p style="color: #cbd5e1; font-size: 0.88rem;">Cookie consent manager and Creatio chatbot are loaded as asynchronous third-party or internal SDK scripts without blocking form interaction.</p>
+          </div>
+        
+          <div class="assume-card">
+            <strong>User Accounts</strong>
+            <p style="color: #cbd5e1; font-size: 0.88rem;">Test accounts with active, inactive, locked, and unverified states are seeded in the QA database.</p>
+          </div>
+        
+      </div>
+    </section>
+
+    <!-- Section 4: Comprehensive Test Scenarios -->
+    <section class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="section-icon icon-scenario">🧪</span>
+          QA Test Scenarios Matrix
+        </div>
+        <span class="tag tag-func">17 Scenarios</span>
+      </div>
+
+      <div class="filter-toolbar">
+        <div class="filter-pills" id="categoryFilterGroup">
+          <button class="filter-btn active" data-filter="all">All (17)</button>
+          <button class="filter-btn" data-filter="UI/UX">UI/UX</button>
+          <button class="filter-btn" data-filter="Functional">Functional</button>
+          <button class="filter-btn" data-filter="Negative">Negative / Boundary</button>
+          <button class="filter-btn" data-filter="Security">Security</button>
+          <button class="filter-btn" data-filter="Social Auth">Social Auth</button>
+          <button class="filter-btn" data-filter="Accessibility">Accessibility</button>
+        </div>
+        <input type="text" id="scenarioSearch" class="search-input" placeholder="Search scenarios, steps, expected results...">
+      </div>
+
+      <div class="table-container">
+        <table id="scenariosTable">
+          <thead>
+            <tr>
+              <th style="width: 110px;">ID</th>
+              <th style="width: 110px;">Type</th>
+              <th style="width: 220px;">Scenario Title</th>
+              <th>Pre-Conditions & Test Steps</th>
+              <th>Expected Result</th>
+              <th style="width: 80px;">Priority</th>
+              <th style="width: 90px;">Automation</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              <tr data-type="UI/UX" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_UI_001</span></td>
+                <td><span class="tag tag-ui">UI/UX</span></td>
+                <td><strong style="color: #fff;">Verify Login Form Layout, Header & Core Elements Presence</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> Navigate to Creatio CRM Login URL</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Verify page title and presence of header "LOG IN TO YOUR ACCOUNT"</li><li>Verify Business Email label and textbox exist above password</li><li>Verify Password label and textbox exist with "Forgot password" link placed on top</li><li>Verify "LOG IN" button is visible and properly styled</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">All elements match design specifications, fonts, and positions precisely without visual clipping.</td>
+                <td><span class="tag tag-p1">P1</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="UI/UX" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_UI_002</span></td>
+                <td><span class="tag tag-ui">UI/UX</span></td>
+                <td><strong style="color: #fff;">Verify Social Login Section, Logos and Hyperlinks</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> Login page loaded in viewport</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Verify text "or log in using" displayed below LOG IN button</li><li>Verify LinkedIn, Google, and Facebook logos with matching hyperlink labels appear</li><li>Verify text "Don’t have an account?" is displayed</li><li>Verify "SIGN UP" hyperlink is visible below it</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">Social options display crisp brand icons, hover underlines, and proper spacing.</td>
+                <td><span class="tag tag-p2">P2</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="UI/UX" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_UI_003</span></td>
+                <td><span class="tag tag-ui">UI/UX</span></td>
+                <td><strong style="color: #fff;">Verify Bottom Widgets: Cookie Settings and Creatio Chatbot Icons</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> Login page loaded</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Inspect bottom-left corner of the viewport for Cookie Settings icon (no text label)</li><li>Inspect bottom-right corner of the viewport for Creatio Chatbot icon (no text label)</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">Both icons are anchored in fixed/absolute corners with appropriate z-index and tooltip/aria-label.</td>
+                <td><span class="tag tag-p2">P2</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Functional" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_FUNC_001</span></td>
+                <td><span class="tag tag-func">Functional</span></td>
+                <td><strong style="color: #fff;">Successful Login with Valid Business Email and Password</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> User account registered and active in CRM database</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Enter registered business email: "qa.test@creatio-crm.com"</li><li>Enter valid password: "ValidPassword123!"</li><li>Click "LOG IN" button</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">User is authenticated, auth token/cookie set, and redirected to CRM Dashboard.</td>
+                <td><span class="tag tag-p1">P1</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Functional" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_FUNC_002</span></td>
+                <td><span class="tag tag-func">Functional</span></td>
+                <td><strong style="color: #fff;">Verify Password Visibility Toggle (Eye Icon)</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> User enters text in password field</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Enter "SecretPass123" in Password field</li><li>Verify characters are masked (bullet points / type="password")</li><li>Click the Eye Icon inside password textbox</li><li>Verify password text becomes visible ("SecretPass123" / type="text")</li><li>Click Eye Icon again to re-mask</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">Eye icon toggles between open/closed state and reveals/masks characters smoothly.</td>
+                <td><span class="tag tag-p1">P1</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Functional" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_FUNC_003</span></td>
+                <td><span class="tag tag-func">Functional</span></td>
+                <td><strong style="color: #fff;">Verify "Forgot password" Link Navigation</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> User on Login form</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Click on "Forgot password" link placed on top of Password textbox</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">User is navigated to Password Recovery page with email input field.</td>
+                <td><span class="tag tag-p2">P2</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Functional" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_FUNC_004</span></td>
+                <td><span class="tag tag-func">Functional</span></td>
+                <td><strong style="color: #fff;">Verify "SIGN UP" Navigation for New User Registration</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> User on Login form</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Click on "SIGN UP" link under "Don’t have an account?"</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">User is directed to Account Registration / Free Trial onboarding form.</td>
+                <td><span class="tag tag-p2">P2</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Functional" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_FUNC_005</span></td>
+                <td><span class="tag tag-func">Functional</span></td>
+                <td><strong style="color: #fff;">Verify Cookie Settings Modal & Consent Lifecycle</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> Login page loaded</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Click Cookie Settings icon in bottom-left corner</li><li>Verify modal opens displaying categories (Necessary, Analytics, Marketing)</li><li>Toggle non-necessary cookies to Off and click Save Preferences</li><li>Re-open cookie settings and verify updated preference persisted</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">Cookie preference modal opens cleanly and persists user consent settings.</td>
+                <td><span class="tag tag-p2">P2</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Functional" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_FUNC_006</span></td>
+                <td><span class="tag tag-func">Functional</span></td>
+                <td><strong style="color: #fff;">Verify Creatio Chatbot Widget Interaction</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> Login page loaded</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Click Chatbot icon in bottom-right corner</li><li>Verify FAQ chat assistant widget expands</li><li>Send sample message "Forgot login password"</li><li>Verify automated FAQ reply is returned</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">Chatbot widget toggles without freezing UI and offers customer self-service assistance.</td>
+                <td><span class="tag tag-p3">P3</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Negative" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_NEG_001</span></td>
+                <td><span class="tag tag-neg">Negative</span></td>
+                <td><strong style="color: #fff;">Submit Login with Blank Fields</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> Both Email and Password fields are empty</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Leave email and password empty</li><li>Click "LOG IN" button</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">Inline validation errors appear: "Please enter your business email" and "Please enter your password". No network submit.</td>
+                <td><span class="tag tag-p1">P1</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Negative" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_NEG_002</span></td>
+                <td><span class="tag tag-neg">Negative</span></td>
+                <td><strong style="color: #fff;">Input Invalid Email Format & Non-Business Domains</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> Form is empty</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Enter invalid emails ("plainaddress", "missing@domain", "@nodomain.com")</li><li>Enter valid password and click "LOG IN"</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">Validation error: "Please enter a valid business email address".</td>
+                <td><span class="tag tag-p1">P1</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Negative" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_NEG_003</span></td>
+                <td><span class="tag tag-neg">Negative</span></td>
+                <td><strong style="color: #fff;">Invalid Credentials (Wrong Password / Unregistered Email)</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> Registered email in database</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Enter registered email "qa.test@creatio-crm.com"</li><li>Enter incorrect password "WrongPassword999!"</li><li>Click "LOG IN"</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">Generic secure error displayed: "Invalid email or password. Please try again." Password field cleared.</td>
+                <td><span class="tag tag-p1">P1</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Negative" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_NEG_004</span></td>
+                <td><span class="tag tag-edge">Negative</span></td>
+                <td><strong style="color: #fff;">Boundary Value Testing: Max Length and Unicode Handling</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> Login form loaded</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Enter 255-character email string</li><li>Enter 128-character complex password with unicode characters (€, ñ, 🚀)</li><li>Attempt submission</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">System handles character limits gracefully without DB exception or UI overflow.</td>
+                <td><span class="tag tag-p2">P2</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Security" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_SEC_001</span></td>
+                <td><span class="tag tag-sec">Security</span></td>
+                <td><strong style="color: #fff;">SQL Injection and XSS Payload Resilience</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> Form is empty</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Enter SQL injection payload in email: "admin' OR '1'='1"</li><li>Enter XSS payload in password: "<script>alert(1)</script>"</li><li>Click "LOG IN"</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">Input is safely sanitized/parameterized. Error displayed without script execution or database errors.</td>
+                <td><span class="tag tag-p1">P1</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Security" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_SEC_002</span></td>
+                <td><span class="tag tag-sec">Security</span></td>
+                <td><strong style="color: #fff;">Password Masking in Network Payload & Clipboard</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> DevTools Network tab recording</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Enter password in textbox</li><li>Submit form and inspect HTTP request payload</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">Password is sent in JSON body over HTTPS (POST method); NEVER exposed in URL query parameters.</td>
+                <td><span class="tag tag-p1">P1</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Social Auth" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_SOC_001</span></td>
+                <td><span class="tag tag-func">Social Auth</span></td>
+                <td><strong style="color: #fff;">Federated Login via LinkedIn / Google / Facebook</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> User has third-party test account</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Click "Google" social login option</li><li>Verify OAuth consent dialog opens with valid client_id</li><li>Authenticate with Google test credentials</li><li>Verify successful callback into CRM application</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">User account is linked or created via OAuth token and redirects to dashboard.</td>
+                <td><span class="tag tag-p2">P2</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+              <tr data-type="Accessibility" class="scenario-row">
+                <td><span class="code-pill">TS_CRM5_A11Y_001</span></td>
+                <td><span class="tag tag-a11y">Accessibility</span></td>
+                <td><strong style="color: #fff;">Keyboard Tab Navigation & Screen Reader ARIA Compliance</strong></td>
+                <td>
+                  <div style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 4px;"><em>Pre-cond:</em> No mouse usage (keyboard only)</div>
+                  <ol style="margin-left: 18px; font-size: 0.85rem; color: #cbd5e1;">
+                    <li>Use Tab key to traverse: Email -> Password -> Forgot Password -> Eye Icon -> LOG IN -> Social Icons -> Sign Up -> Cookie -> Chatbot</li><li>Press Enter while focused on LOG IN button</li>
+                  </ol>
+                </td>
+                <td style="font-size: 0.88rem; color: #e2e8f0;">Focus indicator is clearly visible on every interactive control; Enter key submits form; icon buttons have aria-label.</td>
+                <td><span class="tag tag-p2">P2</span></td>
+                <td><span class="tag tag-auto-yes">Automate</span></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 5: Test Data Requirements -->
+    <section class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="section-icon icon-data">📊</span>
+          Test Data Matrix & Payloads
+        </div>
+        <span class="tag tag-data">8 Test Data Sets</span>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Data Set</th>
+              <th>Classification</th>
+              <th>Sample Input / Credentials</th>
+              <th>Target Fields</th>
+              <th>Expected Behavior / Objective</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td><strong style="color: #fff;">Valid Standard User</strong></td>
+                <td><span class="tag tag-func">Valid Happy Path</span></td>
+                <td><span class="code-pill">alex.smith@creatio-crm.com / P@ssw0rd2026!</span></td>
+                <td><span style="color: #cbd5e1;">Email, Password</span></td>
+                <td style="color: #94a3b8; font-size: 0.85rem;">Verifies normal authentication flow and redirect to dashboard.</td>
+              </tr>
+            
+              <tr>
+                <td><strong style="color: #fff;">Valid Admin User</strong></td>
+                <td><span class="tag tag-func">Valid Role-based</span></td>
+                <td><span class="code-pill">admin.ops@creatio-crm.com / AdminSecure#2026</span></td>
+                <td><span style="color: #cbd5e1;">Email, Password</span></td>
+                <td style="color: #94a3b8; font-size: 0.85rem;">Verifies admin privilege onboarding and system console access.</td>
+              </tr>
+            
+              <tr>
+                <td><strong style="color: #fff;">Empty Credentials</strong></td>
+                <td><span class="tag tag-func">Negative Validation</span></td>
+                <td><span class="code-pill">"" (empty string) / "" (empty string)</span></td>
+                <td><span style="color: #cbd5e1;">Email, Password</span></td>
+                <td style="color: #94a3b8; font-size: 0.85rem;">Verifies client-side validation triggers without server roundtrip.</td>
+              </tr>
+            
+              <tr>
+                <td><strong style="color: #fff;">Malformed Email</strong></td>
+                <td><span class="tag tag-func">Negative Validation</span></td>
+                <td><span class="code-pill">invalid-email-address / ValidPass123!</span></td>
+                <td><span style="color: #cbd5e1;">Email</span></td>
+                <td style="color: #94a3b8; font-size: 0.85rem;">Verifies email format regex and immediate helper error text.</td>
+              </tr>
+            
+              <tr>
+                <td><strong style="color: #fff;">Incorrect Password</strong></td>
+                <td><span class="tag tag-func">Negative Validation</span></td>
+                <td><span class="code-pill">alex.smith@creatio-crm.com / WrongP@ss999</span></td>
+                <td><span style="color: #cbd5e1;">Password</span></td>
+                <td style="color: #94a3b8; font-size: 0.85rem;">Verifies generic error message to prevent username enumeration.</td>
+              </tr>
+            
+              <tr>
+                <td><strong style="color: #fff;">SQLi Attack String</strong></td>
+                <td><span class="tag tag-func">Security Validation</span></td>
+                <td><span class="code-pill">' OR 1=1 -- / ' OR 'a'='a</span></td>
+                <td><span style="color: #cbd5e1;">Email, Password</span></td>
+                <td style="color: #94a3b8; font-size: 0.85rem;">Verifies SQL injection protection and parameterized queries.</td>
+              </tr>
+            
+              <tr>
+                <td><strong style="color: #fff;">XSS Attack String</strong></td>
+                <td><span class="tag tag-func">Security Validation</span></td>
+                <td><span class="code-pill"><script>alert(document.cookie)</script> / standardPass</span></td>
+                <td><span style="color: #cbd5e1;">Email</span></td>
+                <td style="color: #94a3b8; font-size: 0.85rem;">Verifies input HTML entity escaping and XSS immunity.</td>
+              </tr>
+            
+              <tr>
+                <td><strong style="color: #fff;">Google OAuth Test Mock</strong></td>
+                <td><span class="tag tag-neg">Social Login</span></td>
+                <td><span class="code-pill">test.oauth.google@creatio-test.com</span></td>
+                <td><span style="color: #cbd5e1;">Google OAuth Provider</span></td>
+                <td style="color: #94a3b8; font-size: 0.85rem;">Verifies successful third-party federated sign-in.</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 6: Execution Strategy & Test Environments -->
+    <section class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="section-icon icon-strategy">⚙️</span>
+          Execution Strategy & QA Sign-Off Criteria
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <div style="background: #1e293b; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+          <h4 style="color: #38bdf8; margin-bottom: 10px;">Playwright Automation Scope</h4>
+          <ul style="margin-left: 20px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.7;">
+            <li>Form render verification & element visibility checks</li>
+            <li>Password eye toggle mask/unmask verification</li>
+            <li>Happy path login and session cookie creation</li>
+            <li>Input validation error messages (empty, malformed email)</li>
+            <li>Forgot password, Sign Up, and Social link routing</li>
+          </ul>
+        </div>
+        <div style="background: #1e293b; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+          <h4 style="color: #fbbf24; margin-bottom: 10px;">Target Test Environments</h4>
+          <ul style="margin-left: 20px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.7;">
+            <li>Browsers: Chromium (Desktop), Firefox (Desktop), WebKit (Safari)</li>
+            <li>Viewports: Desktop (1920x1080), Tablet (768x1024), Mobile (375x812)</li>
+            <li>Cookie states: Fresh Incognito, First-party Allowed, Third-party Blocked</li>
+            <li>Network: High-speed Broadband, Simulated Fast 3G throttling</li>
+          </ul>
+        </div>
+        <div style="background: #1e293b; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+          <h4 style="color: #34d399; margin-bottom: 10px;">QA Entry & Exit Criteria</h4>
+          <ul style="margin-left: 20px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.7;">
+            <li><strong>Entry:</strong> Deploy to QA staging with functional Auth APIs & mock social endpoints</li>
+            <li><strong>Exit:</strong> 100% of P1 & P2 test scenarios executed and passed</li>
+            <li><strong>Zero Blockers:</strong> No open Critical or High severity security/login defects</li>
+            <li><strong>Zephyr Linkage:</strong> All test executions logged in Zephyr / Jira</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Generated by <strong>QA Requirement Analysis AI Agent</strong> | Playwright TDD Framework</p>
+      <p style="margin-top: 6px; font-size: 0.78rem;">Connected via Jira Cloud REST API (bharathtechacademy40.atlassian.net) | Issue Key: CRM-5</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Real-time Search and Filtering
+    const searchInput = document.getElementById('scenarioSearch');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const rows = document.querySelectorAll('.scenario-row');
+
+    let activeFilter = 'all';
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        applyFilters();
+      });
+    });
+
+    searchInput.addEventListener('input', applyFilters);
+
+    function applyFilters() {
+      const query = searchInput.value.toLowerCase().trim();
+
+      rows.forEach(row => {
+        const type = row.dataset.type;
+        const text = row.innerText.toLowerCase();
+
+        const matchesFilter = activeFilter === 'all' || type.includes(activeFilter) || 
+          (activeFilter === 'Negative' && (type.includes('Negative') || type.includes('Boundary'))) ||
+          (activeFilter === 'Social Auth' && type.includes('Social'));
+        const matchesQuery = !query || text.includes(query);
+
+        if (matchesFilter && matchesQuery) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -187,17 +187,17 @@ Success Response :
   "message": "Products fetched successfully",
   "data": [
     {
-      "id": "iphone-15-128gb",
-      "name": "iPhone 15",
-      "price": 49999,
-      "storage": "128GB",
+      "id": "iphone-17-ProMax-512Gb",
+      "name": "iPhone 17-Promax",
+      "price": 149999,
+      "storage": "512GB",
       "currency": "INR"
     },
     {
-      "id": "iphone-14-128gb",
-      "name": "iPhone 14",
-      "price": 44999,
-      "storage": "128GB",
+      "id": "iphone-17-512GB",
+      "name": "iPhone 17",
+      "price": 124999,
+      "storage": "512GB",
       "currency": "INR"
     }
   ]

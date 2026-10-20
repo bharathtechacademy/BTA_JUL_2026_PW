@@ -1,0 +1,15 @@
+﻿ID,Work Item Type,Title,Test Step,Step Action,Step Expected,Area Path,Assigned To,State
+,Test Case,Verify the cookies pop-up is displayed successfully.,,,,Creatio CRM(Bharath Tech Academy),Bharath Tech Academy <bharattechacademy3@outlook.com>,Design
+,,,1,Launch the Chrome browser. ,Chrome browser should be launched successfully. ,,,
+,,,2,Enter the URL - https://accounts.creatio.com/login/alm  and navigate to the Creatio application. ,The user should be navigated to the Creatio application successfully. ,,,
+,,,3,Verify the cookies pop-up is displayed successfully,"When the user navigates to the application, the cookies pop-up should be displayed immediately. ",,,
+,Test Case,Verify cookies pop-up closed successfully after clicking on the 'Allow all' button,,,,Creatio CRM(Bharath Tech Academy),Bharath Tech Academy <bharattechacademy3@outlook.com>,Design
+,,,1,Launch the Chrome browser. ,Chrome browser should be launched successfully. ,,,
+,,,2,Enter the URL - https://accounts.creatio.com/login/alm  and navigate to the Creatio application. ,The user should be navigated to the Creatio application successfully. ,,,
+,,,3,Verify the cookies pop-up is displayed successfully,"When the user navigates to the application, the cookies pop-up should be displayed immediately. ",,,
+,,,4,Verify cookies pop-up selection buttons are displayed successfully. ,"Cookie pop-up should display below selection buttons. 
+
+Allow All
+Allow Selection
+Deny",,,
+,,,5,Click on the 'Allow All' button. ,"The user should be able to click on the 'Allow all' button, and immediately the cookies popup should be closed successfully. ",,,

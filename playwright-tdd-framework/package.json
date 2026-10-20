@@ -14,6 +14,11 @@
   },
   "scripts": {
     "ui": "npx playwright test tests/ui --headed --project=chromium",
-    "failed": "npx playwright test --last-failed --project=chromium --headed"
+    "failed": "npx playwright test --last-failed --project=chromium --headed",
+    "requirement-analysis": "node ai-implementation/requirement-analysis/generate-requirement-analysis.mjs",
+    "azure-requirement-analysis": "node ai-implementation/requirement-analysis/generate-azure-requirement-analysis.mjs",
+    "generate-testcases": "node ai-implementation/testcases/generate-testcases.mjs",
+    "generate-azure-testcases": "node ai-implementation/testcases/generate-azure-testcases.mjs",
+    "execute-test-cycle": "node ai-implementation/test-execution/execute-test-cycle.mjs"
   }
 }
