@@ -94,5 +94,20 @@ export class LoginPageSteps {
         await this.web.enterText(loginPage.loginPassword, password);
     }
 
+    // Method to enter password in the password textbox
+    async enterPassword(password: string) {
+        await this.web.enterText(loginPage.passwordTextBox, password);
+    }
 
-}
+    // Method to click on the password visibility eye icon
+    async clickOnPasswordEyeIcon() {
+        await this.web.click(loginPage.passwordEyeIcon);
+    }
+
+    // Method to verify password input type attribute
+    async verifyPasswordInputType(expectedType: string) {
+        const actualType = await this.web.getAttribute(loginPage.passwordTextBox, 'type');
+        await this.web.compareValues(actualType, expectedType);
+    }
+
+}

@@ -12,6 +12,6 @@
     "loginAuthHeader":"h1[class='web-auth-title']",
     "loginEmail":"input[name='email']",
     "continueButton":"button[type='submit']",
-    "loginPassword":"input#login-password"
-
-}
+    "loginPassword":"input#login-password",
+    "passwordEyeIcon": "mat-icon.eye-icon"
+}

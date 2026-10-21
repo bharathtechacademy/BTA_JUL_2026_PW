@@ -19,6 +19,9 @@
     "azure-requirement-analysis": "node ai-implementation/requirement-analysis/generate-azure-requirement-analysis.mjs",
     "generate-testcases": "node ai-implementation/testcases/generate-testcases.mjs",
     "generate-azure-testcases": "node ai-implementation/testcases/generate-azure-testcases.mjs",
-    "execute-test-cycle": "node ai-implementation/test-execution/execute-test-cycle.mjs"
+    "execute-test-cycle": "node ai-implementation/test-execution/execute-test-cycle.mjs",
+    "execute-azure-test-suite": "node ai-implementation/test-execution/execute-azure-test-suite.mjs",
+    "sync-azure-test-results": "node ai-implementation/test-execution/sync-azure-test-results.mjs",
+    "automate-azure-testcase": "node ai-implementation/test-automation/automate-azure-testcase.mjs"
   }
 }

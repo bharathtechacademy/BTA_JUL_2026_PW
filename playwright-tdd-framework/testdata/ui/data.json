@@ -33,5 +33,11 @@
         "button": "allow all",
         "username": "bharattechacademy5@outlook.com",
         "password": "Invalid#1234"
-    }]
-}
+    }],
+    "Verify Password Visibility Toggle Functionality Using Eye Icon": {
+        "button": "allow all",
+        "password": "BharathTechAcademy#1234",
+        "maskedType": "password",
+        "unmaskedType": "text"
+    }
+}
